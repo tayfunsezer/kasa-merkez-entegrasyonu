@@ -1,0 +1,31 @@
+Update queryleri şuanda tüm kayıtları update ediyor. 
+Satış tipi başlıkjtan geldiğpinde konu ona göre ghüncelle
+FIS, EFA ve EAR dışında kayıt olabilir mi ona göer bak
+
+
+
+
+TODO:
+
+HAREKET satırın artması gerekiyor 1 er 1 er: Satir
+belge kolon karşılaştırması 
+
+buik insertte detayda belgeid ler yok. (ok)
+belge_id caride de aynı mı olmalı? (ok)
+concurrency (ok)
+belge cari kolon karşılaştırması (ok)
+hareket kolon karşılaştırması  (ok)
+ 
+
+ABİME SORULAR:
+Z_No sorusu yanıtısz
+
+
+ NOTLAR:
+
+=== TRANSACTION SCOPE ===
+ Hata durumunda işlemleerin geri alınması yapıbilmesi için MSDTC nin aktifleştirilmesi gerekiyor diye hatırlıyorum. Şöyle aktifleştirebilir. https://stackoverflow.com/a/27263904 
+ Eğer TransactionScope ya da DTC gibi bi hata alıyorsak TranasctionScope u kaldırabiliriz. Kolay kaldırması.  MigrationScheduler'dan 15,16,48 ve 57. satırları silmek yeterli.
+
+
+ 
