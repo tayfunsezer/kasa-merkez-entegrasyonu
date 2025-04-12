@@ -5,13 +5,18 @@
 TODO:
 
 HAREKET satırın artması gerekiyor 1 er 1 er: Satir
-belge kolon karşılaştırması 
+Z_No kolonu?
+belge tablosu kolon karşılaştırması 
+EFA,EAR ve FIS den başka kayıtlar olabiliyorsa kodu gözden geçir
 
+hataların loglanması (ok)
 buik insertte detayda belgeid ler yok. (ok)
-belge_id caride de aynı mı olmalı? (ok)
-concurrency (ok)
+belge_id caride de aynı olmalı? (ok)
+concurrency koruması ve timer (ok)
 belge cari kolon karşılaştırması (ok)
 hareket kolon karşılaştırması  (ok)
+işlem tamamlandıktan sonra kayıtların aktarıldı olarak işaretlenmesi (ok)
+EFA','EAR' belge tipli başlıklar BELGE_CARI tablosuna da eklensin. (ok)
  
 
 
