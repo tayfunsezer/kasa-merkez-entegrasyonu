@@ -1,0 +1,13 @@
+==KULLANIM==
+
+MigrationScheduler içinde Timer örneği var. Onu kodun istediğin tarafına ekleyebilirsin.
+
+
+=== TRANSACTION SCOPE ===
+ MSDTC, network üzerindeki 2 SQL server üzerinde transaction gerektiğinde kullanılan bir servis. Programda da olması faydalı. Aktarım esnasında hata alınması durumunda işlemleerin geri alınması yapıbilmesi için MSDTC nin aktifleştirilmesi gerekiyor diye hatırlıyorum. 
+ Şöyle aktifleştirebilir. https://stackoverflow.com/a/27263904 
+ Eğer TransactionScope ya da DTC gibi bi hata alıyorsak TranasctionScope u kaldırabiliriz. Kolay kaldırması.  MigrationScheduler'dan 15,16,48 ve 57. satırları silmek yeterli.
+
+
+=== BELGE TIPI ===
+Kod belge tipi alanının başlık tablosuında olduğunu varsayıyor.
