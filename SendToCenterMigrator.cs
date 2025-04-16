@@ -171,7 +171,7 @@ public class SendToCenterMigrator
         var getBelgeDataCmd = new SqlCommand(@"
             SELECT 
                 SF.SatFat_BelgeNo, SF.SatFat_FirmaAdi, SF.SatFat_Tarih, SF.ID, '' as SicilNo,  SatFat_Tarih as Kapanis, 0 as Iptal, 0 as Flag, 0 as Puan,  SatFat_Tarihas BelgeTarihi
-                SF.SatFat_EvrakTuru, SF.SatFat_Aratoplam, SF.SatFat_KdvToplam, SF.SatFat_GenelToplam, 
+                SF.SatFat_EvrakTuru, SF.SatFat_Aratoplam, SF.SatFat_KdvToplam, SF.SatFat_GenelToplam
             FROM TBLSATISFATBASLIK SF
             WHERE SF.SatFat_MerkezAktarim = 0
         ", sourceConn);
@@ -227,7 +227,8 @@ public class SendToCenterMigrator
         var getHareketDataCmd = new SqlCommand(@"
             SELECT 
                 BelgeNo -1 as Satir, StokKodu, PluNo, Barkod, DepartmanNo, Kdv, Miktar, H.BaslikID, KasiyerNo, 
-                Fiyat, Tutar, SERVERCOMPANYDID, Tarih, N'Sat' as Tip, 0 as Ind_Flag, 0 as Ind_Miktar, 0 as Satici_No, 0 as Belge_Satir, Miktar as Kalan_Adet, Fiyat as Belge_Fiyat, Miktar as Belge_Adet, Fiyat as İade_Fiyat
+                Fiyat, Tutar, SERVERCOMPANYDID, Tarih, N'Sat' as Tip, 0 as Ind_Flag, 0 as Ind_Miktar, 0 as Satici_No, 0 as Belge_Satir, Miktar as Kalan_Adet, 
+                Fiyat as Belge_Fiyat, Miktar as Belge_Adet, Fiyat as İade_Fiyat, -1 as Satir
             FROM TBLSATISFATHAREKET H
             WHERE SatFat_MerkezAktarim = 0
         ", sourceConn);
@@ -240,6 +241,7 @@ public class SendToCenterMigrator
         hareketDataTable.Columns.Add("Belge_ID", typeof(string));
 
         // Match Belge_ID by BaslikID
+        int satir = 0;
         foreach (DataRow hareketRow in hareketDataTable.Rows)
         {
             int baslikId = Convert.ToInt32(hareketRow["BaslikID"]);
@@ -252,9 +254,13 @@ public class SendToCenterMigrator
             else
             {
                 throw new Exception($"Belge_ID not found for BaslikID = {baslikId}");
-                
             }
+            satir++;
+            hareketRow["Satir"] = satir;
+            
         }
+
+        satir = 0;
 
         // Insert HAREKET with bulk copy
         using (SqlBulkCopy hareketBulkCopy = new SqlBulkCopy(destConn))

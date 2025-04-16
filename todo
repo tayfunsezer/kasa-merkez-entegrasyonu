@@ -4,11 +4,13 @@
 
 TODO:
 
-HAREKET satırın artması gerekiyor 1 er 1 er: Satir
 Z_No kolonu?
 belge tablosu kolon karşılaştırması 
+unutulan kolon eşleşmeleri varsa eklenmesi
 EFA,EAR ve FIS den başka kayıtlar olabiliyorsa kodu gözden geçir
 
+
+HAREKET satırın artması gerekiyor 1 er 1 er: Satir (ok)
 hataların loglanması (ok)
 buik insertte detayda belgeid ler yok. (ok)
 belge_id caride de aynı olmalı? (ok)
