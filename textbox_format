@@ -1,0 +1,21 @@
+İlgili textboxun TextChanged Eventi aşağıdaki gibi olacak.
+
+
+=================
+
+
+
+private void myTextBox_TextChanged(object sender, EventArgs e)
+{
+    string text = myTextBox.Text;
+    var parts = text.Split('.');
+
+    if (parts.Length == 2 && parts[1].Length > 2)
+    {
+        // Trim to 2 digits after dot
+        myTextBox.Text = parts[0] + "." + parts[1].Substring(0, 2);
+
+        // Move cursor to the end
+        myTextBox.SelectionStart = myTextBox.Text.Length;
+    }
+}
