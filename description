@@ -2,6 +2,9 @@
 
 MigrationScheduler içinde Timer örneği var. Onu kodun istediğin tarafına ekleyebilirsin.
 
+MigraitoScheduler console uygulaması gibi düşünülmüş ama birşey farketmiyor. Oradaki Main isimli metodu Form_Load gibi düşünebilirsin.
+Oradaki kodlar Form_Load a taşınacak. Main diye bir method olmasına gerek yok program tarafında.
+
 
 === TRANSACTION SCOPE ===
  MSDTC, network üzerindeki 2 SQL server üzerinde transaction gerektiğinde kullanılan bir servis. Programda da olması faydalı. Aktarım esnasında hata alınması durumunda işlemleerin geri alınması yapıbilmesi için MSDTC nin aktifleştirilmesi gerekiyor diye hatırlıyorum. 
