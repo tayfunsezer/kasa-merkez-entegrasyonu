@@ -199,7 +199,7 @@ public class SendToCenterMigrator
             }
 
             row["SicilNo"] = kasaNo;
-            row["ZNo"] = targetZNo;
+            row["Z_No"] = targetZNo;
         }
 
         // Insert BELGE with bulk copy
