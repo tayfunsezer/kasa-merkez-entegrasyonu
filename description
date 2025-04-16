@@ -9,7 +9,8 @@ Oradaki kodlar Form_Load a taşınacak. Main diye bir method olmasına gerek yok
 === TRANSACTION SCOPE ===
  MSDTC, network üzerindeki 2 SQL server üzerinde transaction gerektiğinde kullanılan bir servis. Programda da olması faydalı. Aktarım esnasında hata alınması durumunda işlemleerin geri alınması yapıbilmesi için MSDTC nin aktifleştirilmesi gerekiyor diye hatırlıyorum. 
  Şöyle aktifleştirebilir. https://stackoverflow.com/a/27263904 
- Eğer TransactionScope ya da DTC gibi bi hata alıyorsak TranasctionScope u kaldırabiliriz. Kolay kaldırması.  MigrationScheduler'dan 15,16,48 ve 57. satırları silmek yeterli.
+ Eğer TransactionScope ya da DTC gibi bi hata alıyorsak TranasctionScope u kaldırabiliriz. Kolay kaldırması. 
+  SendToCenterMigrator'dan 15,16,48 ve 57. satırları silmek yeterli. (silerken dikkat et. sildiğin anda satır numarası değişecek :D)
 
 
 === BELGE TIPI ===
