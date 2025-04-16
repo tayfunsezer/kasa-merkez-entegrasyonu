@@ -4,7 +4,7 @@
 
 TODO:
 
-Z_No kolonu?
+Z_No kolonu (ok) --> "SELECT SonZNo FROM TBLPOSAYARLAR WHERE id = 1" ile son z okunuyor ve 1 arttırılıyor. Aktarıma konu olan tüm başlıklar için bu değer aynı. başlık başına yükselmiyor.
 belge tablosu kolon karşılaştırması 
 unutulan kolon eşleşmeleri varsa eklenmesi
 EFA,EAR ve FIS den başka kayıtlar olabiliyorsa kodu gözden geçir

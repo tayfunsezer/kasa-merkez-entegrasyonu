@@ -171,7 +171,7 @@ public class SendToCenterMigrator
         var getBelgeDataCmd = new SqlCommand(@"
             SELECT 
                 SF.SatFat_BelgeNo, SF.SatFat_FirmaAdi, SF.SatFat_Tarih, SF.ID, '' as SicilNo,  SatFat_Tarih as Kapanis, 0 as Iptal, 0 as Flag, 0 as Puan,  SatFat_Tarihas BelgeTarihi
-                SF.SatFat_EvrakTuru, SF.SatFat_Aratoplam, SF.SatFat_KdvToplam, SF.SatFat_GenelToplam
+                SF.SatFat_EvrakTuru, SF.SatFat_Aratoplam, SF.SatFat_KdvToplam, SF.SatFat_GenelToplam, -1 as Z_No
             FROM TBLSATISFATBASLIK SF
             WHERE SF.SatFat_MerkezAktarim = 0
         ", sourceConn);
@@ -184,6 +184,7 @@ public class SendToCenterMigrator
         belgeDataTable.Columns.Add("Belge_ID", typeof(string));
 
         // Generate Belge_ID per row
+        var targetZNo = GetNextZNo();
         foreach (DataRow row in belgeDataTable.Rows)
         {
             var baslikId = Convert.ToInt32(row["ID"]);
@@ -198,6 +199,7 @@ public class SendToCenterMigrator
             }
 
             row["SicilNo"] = kasaNo;
+            row["ZNo"] = targetZNo;
         }
 
         // Insert BELGE with bulk copy
@@ -216,7 +218,8 @@ public class SendToCenterMigrator
             bulkCopy.ColumnMappings.Add("Iptal", "Iptal");
             bulkCopy.ColumnMappings.Add("Flag", "Flag");
             bulkCopy.ColumnMappings.Add("Puan", "Puan");
-
+            bulkCopy.ColumnMappings.Add("Z_No", "Z_No");
+            
 
 
 
@@ -320,4 +323,24 @@ public class SendToCenterMigrator
         string fullBelgeId = kasaSicilNo + uniquePart;
         return fullBelgeId.PadLeft(19, '0').Substring(0, 19); // Ensure it's exactly 19 digits
     }
+    
+    public int GetNextZNo()
+    {
+        int yeniZNo = -1;
+
+        using (SqlConnection conn = new SqlConnection(sourceConnStr))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT SonZNo FROM TBLPOSAYARLAR WHERE id = 1", conn);
+            var result = cmd.ExecuteScalar();
+
+            if (result != null && int.TryParse(result.ToString(), out int mevcutZNo))
+            {
+                yeniZNo = mevcutZNo + 1;
+            }
+        }
+
+        return yeniZNo;
+    }
+
 }
